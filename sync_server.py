@@ -53,7 +53,6 @@ def read_request(client_sock, delimiter=b'!'):
     raise
 
 def handle_request(request):
-  print(request)
   time.sleep(5)
   return request[::-1]
 
@@ -64,4 +63,4 @@ def write_response(client_sock, response, cid):
 
 
 if __name__ == '__main__':
-    run_server(53210)
+    run_server(port=int(sys.argv[1]))
