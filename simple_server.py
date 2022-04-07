@@ -1,5 +1,5 @@
 import socket
-
+#https://iximiuz.com/ru/posts/writing-python-web-server-part-2/
 serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
 serv_sock.bind(('', 53210))
 serv_sock.listen(10)
@@ -16,6 +16,7 @@ while True:
         if not data:
             # Клиент отключился
             break
+        print(data)
         client_sock.sendall(data)
 
     client_sock.close()
