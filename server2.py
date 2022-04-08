@@ -1,21 +1,32 @@
-import socket
+import time, socket, sys
 
-serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
-serv_sock.bind(('', 53210))
-serv_sock.listen(10)
+new_socket = socket.socket()
+host_name = socket.gethostname()
+s_ip = socket.gethostbyname(host_name)
 
+port = 53210
+
+new_socket.bind((host_name, port))
+print( "Binding successful!")
+print("This is your IP: ", s_ip)
+
+name = input('Enter name: ')
+
+new_socket.listen(1)
+
+
+conn, add = new_socket.accept()
+
+print("Received connection from ", add[0])
+print('Connection Established. Connected From: ',add[0])
+
+client = (conn.recv(1024)).decode()
+print(client + ' has connected.')
+
+conn.send(name.encode())
 while True:
-    # Бесконечно обрабатываем входящие подключения
-    client_sock, client_addr = serv_sock.accept()
-    print('Connected by', client_addr)
-
-    while True:
-        # Пока клиент не отключился, читаем передаваемые
-        # им данные и отправляем их обратно
-        data = client_sock.recv(1024)
-        if not data:
-            # Клиент отключился
-            break
-        # client_sock.sendall(data)
-        client_sock.sendall('что?'.encode('utf8'))
-    client_sock.close()
+    message = input('Me : ')
+    conn.send(message.encode())
+    message = conn.recv(1024)
+    message = message.decode()
+    print(client, ':', message)

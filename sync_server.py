@@ -7,7 +7,7 @@ def run_server(port=53210):
   cid = 0
   while True:
     client_sock = accept_client_conn(serv_sock, cid)
-    serve_client(client_sock, cid)
+    serve_client(client_sock, cid)ц
     cid += 1
 
 def serve_client(client_sock, cid):
