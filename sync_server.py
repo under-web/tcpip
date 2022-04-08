@@ -12,6 +12,7 @@ def run_server(port=53210):
 
 def serve_client(client_sock, cid):
   request = read_request(client_sock)
+  print(request)
   if request is None:
     print(f'Client #{cid} unexpectedly disconnected')
   else:
@@ -63,4 +64,4 @@ def write_response(client_sock, response, cid):
 
 
 if __name__ == '__main__':
-    run_server(port=int(sys.argv[1]))
+    run_server()
